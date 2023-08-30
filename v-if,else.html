@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conditional Rendering</title>
+</head>
+
+<body>
+    <div id="app">
+        <div v-if="available">Item is available</div>
+        <div v-else>Item is not available</div>
+
+        <div>
+            <button @click="toggleAvailability()">
+                {{ available ? 'Mark as Unavailable' : 'Mark as Available' }}
+            </button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                available: true
+            },
+            methods: {
+                toggleAvailability() {
+                    this.available = !this.available;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

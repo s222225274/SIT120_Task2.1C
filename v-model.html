@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-if with v-for and v-model Example</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>List of Books Availability</h1>
+        <ul>
+            <li v-for="(item, index) in items" :key="index">
+                <span v-if="item.available">{{ item.name }} (ID: {{ item.id }})</span>
+                <span v-else>{{ item.name }} (Unavailable)</span>
+            </li>
+        </ul>
+
+        <h2>Add New Book</h2>
+        <div>
+            <input type="text" v-model="newBookName" placeholder="Book Name">
+            <label>Available: <input type="checkbox" v-model="newBookAvailable"></label>
+            <button @click="addBook">Add Book</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                items: [
+                    { id: 1, name: 'Harry Potter', available: true },
+                    { id: 2, name: 'Percy Jackson', available: false },
+                    { id: 3, name: 'Hunger Games', available: true },
+                    { id: 4, name: 'Twilight', available: false }
+                ],
+                newBookName: '',
+                newBookAvailable: false
+            },
+            methods: {
+                addBook() {
+                    if (this.newBookName.trim() !== '') {
+                        this.items.push({
+                            id: this.items.length + 1,
+                            name: this.newBookName,
+                            available: this.newBookAvailable
+                        });
+
+                        this.newBookName = '';
+                        this.newBookAvailable = false;
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
